@@ -1,4 +1,4 @@
-# load seed to initialize subscription Plans
+#will load automatically when test run
 
 Plan.create(name: 'Bronze Box', price: 1999)
 Plan.create(name: 'Silver Box', price: 4900)
