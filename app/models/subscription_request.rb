@@ -1,4 +1,6 @@
-require 'rest-client'
+require 'net/http'
+require 'uri'
+require 'json'
 
 class SubscriptionRequest
   include ActiveModel::Model
@@ -16,14 +18,28 @@ class SubscriptionRequest
   validates :plan_id, presence: true
 
   def send_request
-    data = { 'amount' => "#{Plan.find_by(id: plan_id).price}", 'card_number' => "#{card_num }" }
+    uri = URI.parse("https://www.fakepay.io/purchase")
+      request = Net::HTTP::Post.new(uri)
+      request.content_type = "application/json"
+      request["Authorization"] = "Token token=#{ENV['SECRET_API_TOKEN']}"
+      request.body = JSON.dump({
+        "amount" => "#{Plan.find_by(id: plan_id).price}",
+        "card_number" => "#{card_num }",
+        "cvv" => "#{cvv}",
+        "expiration_month" => "#{expiration.month}",
+        "expiration_year" => "#{expiration.year}",
+        "zip_code" => "#{billing_zip}"
+      })
 
-    headers = { :content_type => :json, 'authorisation' => "Token token=#{ENV['SECRET_API_TOKEN']}" }
+      req_options = {
+        use_ssl: uri.scheme == "https",
+      }
 
-    url = 'https://www.fakepay.io/purchase'
+    response = Net::HTTP.start(uri.hostname, uri.port, req_options) do |http|
+      http.request(request)
+    end
 
-    response = RestClient.post url, data.to_json, headers
-
+    data = JSON.parse(response.body)
   end
 
 end
