@@ -1,3 +1,5 @@
+require 'rest-client'
+
 class SubscriptionRequest
   include ActiveModel::Model
   include ActiveModel::Validations
@@ -13,6 +15,15 @@ class SubscriptionRequest
   validates :billing_zip, presence: true
   validates :plan_id, presence: true
 
+  def send_request
+    data = { 'amount' => "#{Plan.find_by(id: plan_id).price}", 'card_number' => "#{card_num }" }
 
+    headers = { :content_type => :json, 'authorisation' => "Token token=#{ENV['SECRET_API_TOKEN']}" }
+
+    url = 'https://www.fakepay.io/purchase'
+
+    response = RestClient.post url, data.to_json, headers
+
+  end
 
 end
