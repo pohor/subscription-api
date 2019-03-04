@@ -26,8 +26,8 @@ class SubscriptionRequest
         "amount" => "#{Plan.find_by(id: plan_id).price}",
         "card_number" => "#{card_num }",
         "cvv" => "#{cvv}",
-        "expiration_month" => "#{expiration.month}",
-        "expiration_year" => "#{expiration.year}",
+        "expiration_month" => "#{expiration.to_date.strftime "%Y"}",
+        "expiration_year" => "#{expiration.to_date.strftime "%m"}",
         "zip_code" => "#{billing_zip}"
       })
 
