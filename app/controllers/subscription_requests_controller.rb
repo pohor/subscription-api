@@ -1,6 +1,5 @@
 class SubscriptionRequestsController < ApplicationController
-
-
+  
   def new
     subscription_request = SubscriptionRequest.new
   end
@@ -8,15 +7,13 @@ class SubscriptionRequestsController < ApplicationController
   def create
     @subscription_request = SubscriptionRequest.new(subscription_request_params)
     if @subscription_request.valid?
-      puts "valid"
       @response = @subscription_request.send_request
-        if @response["success"] == true
+        if @response[:success] == true
           @customer = Customer.create(customer_params)
           @subscription = Subscription.create(subscription_params)
-        elsif @response["success"] == false
-          puts "error" #handle code errors here
+          render :json => { success: @response[:message] }
         else
-          puts "another error" #handle incorrect API key here
+          render :json => { error: @response[:message] }
         end
     else
       render :json => { :errors => @subscription_request.errors }
