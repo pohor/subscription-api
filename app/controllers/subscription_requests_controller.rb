@@ -1,5 +1,5 @@
 class SubscriptionRequestsController < ApplicationController
-  
+
   def new
     subscription_request = SubscriptionRequest.new
   end
@@ -31,7 +31,7 @@ class SubscriptionRequestsController < ApplicationController
   end
 
   def subscription_params
-     subscription_params = { customer_id: @customer.id, plan_id: @subscription_request.plan_id, token: @response["token"], price: Plan.find_by(id: @subscription_request.plan_id).price }
+     subscription_params = { customer_id: @customer.id, plan_id: @subscription_request.plan_id, token: @response[:token], price: Plan.find_by(id: @subscription_request.plan_id).price }
   end
 
 end

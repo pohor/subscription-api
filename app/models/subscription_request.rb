@@ -42,7 +42,7 @@ class SubscriptionRequest
     data = JSON.parse(response.body)
 
     if data["success"] == true
-      message = { success: true, message: "Successfuly added a new subscription"}
+      message = { success: true, token: data["token"], message: "Successfuly added a new subscription"}
     else
       if data["error_code"] == 1000001
         message = { success: false, message: "Invalid credit card number" }

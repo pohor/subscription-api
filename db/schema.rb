@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_02_27_133530) do
+ActiveRecord::Schema.define(version: 2019_03_04_153039) do
 
   create_table "customers", force: :cascade do |t|
     t.string "name"
@@ -28,10 +28,11 @@ ActiveRecord::Schema.define(version: 2019_02_27_133530) do
   create_table "subscriptions", force: :cascade do |t|
     t.integer "customer_id"
     t.integer "plan_id"
-    t.string "token"
+    t.string "encrypted_token"
     t.integer "price"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "encrypted_token_iv"
     t.index ["customer_id"], name: "index_subscriptions_on_customer_id"
     t.index ["plan_id"], name: "index_subscriptions_on_plan_id"
   end
