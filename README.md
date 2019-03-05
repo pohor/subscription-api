@@ -55,7 +55,7 @@ curl -X POST
 
 -H "Content-Type: application/json"
 
--d '{"subscription_request": {"name": "test", "address": "TestAdress", "zipcode": "10045", "card_num": "4242424242420089", "expiration": "2021-03-03 00:58:14 +0100", "cvv": "113", "billing_zip": "10045", "plan_id": "4"}}' 
+-d '{"subscription_request": {"name": "test", "address": "TestAdress", "zipcode": "10045", "card_num": "4242424242424242", "expiration": "2021-03-03 00:58:14 +0100", "cvv": "123", "billing_zip": "10045", "plan_id": "4"}}' 
 
 localhost:3000/subscription_requests
 ```
