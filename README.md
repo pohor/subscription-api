@@ -62,6 +62,12 @@ localhost:3000/subscription_requests
 - You will get a response with JSON informing whether the request was succesful & the subscripion was created or an error explaining what went wrong on the way.
 
 
+### Security
+
+For better security, the customers tokens recieved from the payment gateway are encrypted before saving in db.
+Credit Card numbers are not stored and they are filtered from showing in the logs as well.
+
+
 ### To do's:
 
 * Requests specs
@@ -69,5 +75,7 @@ localhost:3000/subscription_requests
 * Moving the creation of a subscription to a Service Object
 
 * Allowing multiple subscriptions for one user
+
+* Add transaction to avoid charging while not making subscription 
 
 
