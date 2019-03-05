@@ -50,15 +50,17 @@ Additional gems used:
 
 - **example request with curl:**
 
-*curl -X POST
+```
+curl -X POST
 
 -H "Content-Type: application/json"
 
 -d '{"subscription_request": {"name": "test", "address": "TestAdress", "zipcode": "10045", "card_num": "4242424242420089", "expiration": "2021-03-03 00:58:14 +0100", "cvv": "113", "billing_zip": "10045", "plan_id": "4"}}' 
 
-localhost:3000/subscription_requests*
-
+localhost:3000/subscription_requests
+```
 - You will get a response with JSON informing whether the request was succesful & the subscripion was created or an error explaining what went wrong on the way.
+
 
 ### To do's:
 
